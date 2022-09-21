@@ -36,31 +36,34 @@ const Home = () => {
 		} 
 	}
 
-	// function handleDelete(todo,index){
-	// 	let temp = todos.filter(todo, index => index != index);
-	// 	setTodos(temp);
-	// }
+	function handleDelete(id){
+		let copia = [...todos];
+		setTodos(copia.filter(num => num !== id));
+	}
 	
 	return (
-		<div className="text-center">
-			<div className="todoImput">
-				<input type="text" placeholder="Añadir Tarea" value={inputValue} onChange={handleChange} onKeyDown={handleKeyDown}/>
-				<button onClick={handleAdd}>Crear Tarea</button>
-			</div>
+		<div className="appContainer">
+			<h1>ToDo List</h1>
+			<div className="container">
+				<div className="todoImput">
+					<input type="text" placeholder="Añadir Tarea" value={inputValue} onChange={handleChange} onKeyDown={handleKeyDown}/>
+					<button onClick={handleAdd}>Crear Tarea</button>
+				</div>
 			<div className="todoContainer">
 				{
-					todos.map((todo,index)=> {
+					todos.map((todo,id)=> {
 						return (
-							<div className="newTodo" key={index}>
-								{todo}<button>X</button>
+							<div className="newTodo" key={id}>
+								{todo}
+								<button onClick={()=>handleDelete(todo,id)}>X</button>
 							</div>
 						) 
 					})
 				}	
 			</div>
 
+			</div>
 		</div>
-
 	);
 };
 
